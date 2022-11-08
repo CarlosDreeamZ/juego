@@ -3,7 +3,7 @@ el juego */
 window.addEventListener('load', function(){
     const canvas = document.getElementById('canvas1');
     const ctx = canvas.getContext('2d');
-    canvas.width = 700;
+    canvas.width = 600;
     canvas.height = 550;
 // En esta parte se definen las teclas que controlaran al persona
     class InputHandler{
@@ -34,7 +34,7 @@ window.addEventListener('load', function(){
             this.y = y;
             this.width = 10;
             this.height = 4;
-            this.speed = 3;
+            this.speed = 5;
             this.markedForDeletion = false;
         }
 
@@ -46,7 +46,7 @@ window.addEventListener('load', function(){
         }
 
         draw(context){
-            context.fillStyle = 'yellow';
+            context.fillStyle = 'red';
             context.fillRect(this.x, this.y, this.width, this.height);
         }
     }
@@ -61,7 +61,7 @@ se podra mover */
             this.x = 20;
             this.y = 100;
             this.speedY = 0;
-            this.maxSpeed = 1;
+            this.maxSpeed = 5;
             this.projectiles = [];
             this.image = document.getElementById('player');
             this.frameX = 0;
@@ -104,7 +104,7 @@ se podra mover */
 
         shootTop(){
             if(this.game.ammo > 0){
-                this.projectiles.push(new Projectile(this.game, this.x + 80, this.y + 30));
+                this.projectiles.push(new Projectile(this.game, this.x + 80, this.y + 60));
                 this.game.ammo--;
             }
         }
@@ -140,11 +140,11 @@ en el que es representado en el juego */
         draw(context){
             if(this.game.debug) context.strokeRect(this.x, this.y, this.width, this.height);
             context.drawImage(this.image,
-                              this.frameX*this.width,
-                              this.frameY*this.height,
-                              this.width, this.height,  
-                              this.x, this.y,
-                              this.width, this.height);
+                                this.frameX*this.width,
+                                this.frameY*this.height,
+                                this.width, this.height,
+                                this.x, this.y,
+                                this.width, this.height);
             context.font = '20px Helvetica';
             context.fillText(this.lives, this.x, this.y);
         }
@@ -158,7 +158,7 @@ en el que es representado en el juego */
             this.y = Math.random()*(this.game.height*0.9-this.height);
             this.image = document.getElementById('angler1');
             this.frameY = Math.floor(Math.random()*3);
-            this.lives = 2;
+            this.lives = 4;
         }
     }
 
@@ -170,7 +170,7 @@ en el que es representado en el juego */
             this.y = Math.random()*(this.game.height*0.9-this.height);
             this.image = document.getElementById('angler2');
             this.frameY = Math.floor(Math.random()*2);
-            this.lives = 3;
+            this.lives = 6;
         }
     }
 
@@ -182,7 +182,7 @@ en el que es representado en el juego */
             this.y = Math.random()*(this.game.height*0.9-this.height);
             this.image = document.getElementById('lucky');
             this.frameY = Math.floor(Math.random()*2);
-            this.lives = 3;
+            this.lives = 6;
             this.score = 15;
             this.type = 'lucky';
         }
@@ -236,7 +236,7 @@ en el que es representado en el juego */
     class UI{
         constructor(game){
             this.game = game;
-            this.fontSize = 25;
+            this.fontSize = 40;
             this.fontFamily = 'Helvetica';
             this.color = 'white';
         }
@@ -263,7 +263,7 @@ en el que es representado en el juego */
                 let msg2;
 
                 if(this.game.score > this.game.winningScore){
-                    msg1 = 'You Win!'
+                    msg1 = 'Has jugado bien'
                     msg2 = "Hell yeah!"
                 }else {
                     msg1 = 'You Lose';
