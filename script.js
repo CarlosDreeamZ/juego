@@ -1,9 +1,11 @@
+/* En esta parte es donde se ejecuta todo el juego, se crean las variables que se utilizaran para ejecutar el juego y el tamaño que tendra
+el juego */
 window.addEventListener('load', function(){
     const canvas = document.getElementById('canvas1');
     const ctx = canvas.getContext('2d');
     canvas.width = 700;
-    canvas.height = 500;
-
+    canvas.height = 550;
+// En esta parte se definen las teclas que controlaran al persona
     class InputHandler{
         constructor(game){
             this.game = game;
@@ -24,7 +26,7 @@ window.addEventListener('load', function(){
             })
         }
     }
-
+// Aqui se crea clase de los proyectiles que aventara el personaje junto con su ubicacion y el color
     class Projectile{
         constructor(game, x, y){
             this.game = game;
@@ -49,7 +51,8 @@ window.addEventListener('load', function(){
         }
     }
 
-
+/* Aqui crearemos la clase del jugador la cual contendra las dimenciones, la velocidad, los proyectiles, asi como las flechas con las que
+se podra mover */ 
     class Player{
         constructor(game){
             this.game = game;
@@ -106,7 +109,8 @@ window.addEventListener('load', function(){
             }
         }
     }
-
+/* En esta parte creamos la clase del enemigo la cual contiene las dimenciones, la velocidad, las vidas de cada uno, asi como el metodo
+en el que es representado en el juego */
     class Enemy {
         constructor(game){
             this.game = game;
@@ -145,7 +149,7 @@ window.addEventListener('load', function(){
             context.fillText(this.lives, this.x, this.y);
         }
     }
-    
+/* En esta parte es donde creamos los dos tipos de enemigos, donde cada uno tiene sus tamaños, su skin y sus vidas */    
     class Angler1 extends Enemy {
         constructor(game){
             super(game);
@@ -183,7 +187,7 @@ window.addEventListener('load', function(){
             this.type = 'lucky';
         }
     }
-
+/* En esta parte es donde se establece el tamaño del fondo, con la velocidad en que se estara moviendo */
     class Layer {
         constructor(game, image, speedModify){
             this.game = game;
@@ -205,7 +209,7 @@ window.addEventListener('load', function(){
             context.drawImage(this.image, this.x + this.width, this.y + this.height)
         }
     }
-
+/* En esta parte es donde se crea la clase del fondo, donde se llamaran las imagenes que se usaran */
     class Background {
         constructor(game){
             this.game = game;
@@ -228,7 +232,7 @@ window.addEventListener('load', function(){
             this.layers.forEach(layer => layer.draw(context));
         }
     }
-
+/* En esta clase se creara todo lo que se podra observar en el juego, como el tiempo, la municion y el puntaje */
     class UI{
         constructor(game){
             this.game = game;
@@ -273,7 +277,7 @@ window.addEventListener('load', function(){
             context.restore();
         }
     }
-
+/* Esta clase es la maestra, es donde se ceara todo el juego, todos los metodos para que el juego funcione estan aqui */
     class Game{
         constructor(width, height){
             this.width = width;
@@ -370,7 +374,7 @@ window.addEventListener('load', function(){
 
     const game = new Game(canvas.width, canvas.height);
     let lastTime = 0;
-
+// En esta parte es donde se anima todo el juego
     function animate(timeStamp){
         const deltaTime = timeStamp-lastTime;
         lastTime = timeStamp;
